@@ -126,14 +126,14 @@ Note that when running locally, in order to open a web page which uses modules, 
 
 ### For groups of at least 2
 
-- Run the supplied file with `node`, generates a file named `days.ics`. Import that file into a Google Calendar (see instructions above). Verify the same dates as in the web UI.
-- The events in the calendar must be whole-day events, and not have a start/end time.
-- Logic for calculating dates must be shared between the web generator and the iCal generator.
+* Run the supplied file with `node`, generates a file named `days.ics`. Import that file into a Google Calendar (see instructions above). Verify the same dates as in the web UI.
+* The events in the calendar must be whole-day events, and not have a start/end time.
+* Logic for calculating dates must be shared between the web generator and the iCal generator.
 
 ### For groups of at least 3
 
-- Clicking an Ada Lovelace Day in the web UI displays the below text.
-- Clicking a Google Calendar event for Ada Lovelace Day displays the below text.
+* Clicking an Ada Lovelace Day in the web UI displays the below text.
+* Clicking a Google Calendar event for Ada Lovelace Day displays the below text.
 
 Text for Ada Lovelace Day (which must be fetched via API):
 
