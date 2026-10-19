@@ -85,10 +85,10 @@ export function getOccurencesForTheMonth(year, monthName, days) {
         day.occurrence,
       );
       return {
-        year: date.getUTCFullYear(),
-        month: date.getUTCMonth() + 1,
-        day: date.getUTCDate(),
-        name: day.name,
+        year: date.getUTCgit rebase --continueFullYear(),
+          month: date.getUTCMonth() + 1,
+            day: date.getUTCDate(),
+              name: day.name,
       };
-    });
+});
 }
