@@ -61,6 +61,8 @@ As well as all previous requirements, you must:
 - If you import it into Google Calendar, it should show the days correctly in the calendar. There is a suggested workflow for testing this listed below.
 - Logic for calculating dates must be shared between the web generator and the iCal generator.
 
+- Better `ICS File` details explanations can be found on [text-2-ics.com](https://www.text-2-ics.com/blog/ics-file-format-structure-guide)
+
 ### Requirements for groups of at least 3
 
 As well as all previous requirements, you must:
