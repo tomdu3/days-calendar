@@ -15,21 +15,18 @@ const monthHeading = document.getElementById("month-heading");
 const calendarBody = document.getElementById("calendar-body");
 
 const today = new Date();
-
 const year = today.getFullYear();
 const month = today.getMonth();
 
 function renderCalendar(year, month) {
-  // Find the weekday of the first day of the month.
+  // Calculate the first weekday and number of days.
   const firstDay = new Date(year, month, 1).getDay();
-
-  // Find how many days the month contains.
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // Calculate the number of complete weeks needed.
+  // Calculate the minimum number of cells needed.
   const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
 
-  // Display the month and year.
+  // Display the current month and year.
   const date = new Date(year, month, 1);
 
   monthHeading.textContent = date.toLocaleDateString("en-GB", {
@@ -37,44 +34,50 @@ function renderCalendar(year, month) {
     year: "numeric",
   });
 
-  // Clear any previously rendered calendar.
+  // Clear existing calendar cells before rendering.
   calendarBody.replaceChildren();
 
   let row;
 
+  // DOM GENERATION: Create each calendar cell.
   for (let i = 0; i < totalCells; i++) {
-    // Start a new table row every seven cells.
+    // Create a new row every seven cells.
     if (i % 7 === 0) {
       row = document.createElement("tr");
       calendarBody.appendChild(row);
     }
 
+    // Create an individual rectangle.
     const cell = document.createElement("td");
 
-    // Work out which day belongs in this cell.
+    // Calculate the day for this cell position.
     const day = i - firstDay + 1;
 
     if (day >= 1 && day <= daysInMonth) {
+      // Create an accessible date element.
+      const time = document.createElement("time");
+
       const dateString = [
         year,
         String(month + 1).padStart(2, "0"),
         String(day).padStart(2, "0"),
       ].join("-");
 
-      const time = document.createElement("time");
       time.dateTime = dateString;
       time.textContent = day;
 
+      // Put the date inside its rectangle.
       cell.appendChild(time);
     } else {
-      // This cell is padding before or after the month.
+      // Create an empty padding cell.
       cell.classList.add("empty");
       cell.setAttribute("aria-hidden", "true");
     }
 
+    // Add the rectangle to the current row.
     row.appendChild(cell);
   }
 }
 
-// Render the current month on page load.
+// Generate the calendar for the current month.
 renderCalendar(year, month);
