@@ -15,8 +15,7 @@ const monthHeading = document.getElementById("month-heading");
 const calendarBody = document.getElementById("calendar-body");
 
 const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth();
+let displayedDate = new Date(today.getFullYear(), today.getMonth(), 1);
 
 function renderCalendar(year, month) {
   // Calculate the first weekday and number of days.
@@ -79,5 +78,19 @@ function renderCalendar(year, month) {
   }
 }
 
-// Generate the calendar for the current month.
-renderCalendar(year, month);
+const previousButton = document.getElementById("previous-month");
+const nextButton = document.getElementById("next-month");
+
+renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
+
+previousButton.addEventListener("click", () => {
+  displayedDate.setMonth(displayedDate.getMonth() - 1);
+
+  renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
+});
+
+nextButton.addEventListener("click", () => {
+  displayedDate.setMonth(displayedDate.getMonth() + 1);
+
+  renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
+});
