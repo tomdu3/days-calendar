@@ -110,11 +110,6 @@ export function createIcalEvent(day, year, options = {}) {
     "TRANSP:TRANSPARENT",
   ];
 
-  if (day.description) {
-    // TODO: keep it if description is implemented
-    lines.push(`DESCRIPTION:${escapeIcalText(day.description)}`);
-  }
-
   lines.push("END:VEVENT");
 
   return lines.map((line) => foldLine(line)).join("\r\n");
