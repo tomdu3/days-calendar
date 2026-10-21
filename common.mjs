@@ -1,3 +1,11 @@
+/**
+ * Get the date from a day object
+ * @param {number} year - The year
+ * @param {string} monthName - The name of the month
+ * @param {string} dayName - The name of the day
+ * @param {string} occurrence - The occurrence of the day (first, second, third, fourth, last)
+ * @returns {Date} - The date
+ */
 export function getDateFromDaysObject(year, monthName, dayName, occurrence) {
   // Constants for months in a year, days of the week, and occurrences of the day of the week in a month for date calculation
   const monthNames = [
@@ -58,17 +66,29 @@ export function getDateFromDaysObject(year, monthName, dayName, occurrence) {
   return new Date(Date.UTC(year, monthIndex, dayOfMonth));
 }
 
+/**
+ * Get all occurrences of a day in a specific month and year.
+ * @param {number} year - The year
+ * @param {string} monthName - The name of the month
+ * @param {Array<Object>} days - The list of days to get the occurrences for
+ * @returns {Array<Object>} - The occurrences of the day in the specified month and year
+ */
 export function getOccurencesForTheMonth(year, monthName, days) {
   // Filter the days to get only the ones for the specified month
   return days
     .filter((day) => day.monthName === monthName)
-    .map((day) => ({
-      date: getDateFromDaysObject(
+    .map((day) => {
+      const date = getDateFromDaysObject(
         year,
         day.monthName,
         day.dayName,
         day.occurrence,
-      ),
-      name: day.name,
-    }));
+      );
+      return {
+        year: date.getUTCgit rebase --continueFullYear(),
+          month: date.getUTCMonth() + 1,
+            day: date.getUTCDate(),
+              name: day.name,
+      };
+});
 }
