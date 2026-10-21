@@ -76,10 +76,63 @@ function renderCalendar(year, month) {
     // Add the rectangle to the current row.
     row.appendChild(cell);
   }
+  monthSelect.value = month;
+  yearSelect.value = year;
 }
 
 const previousButton = document.getElementById("previous-month");
 const nextButton = document.getElementById("next-month");
+const monthSelect = document.getElementById("month-select");
+const yearSelect = document.getElementById("year-select");
+
+for (let year = 2020; year <= 2035; year++) {
+  const option = document.createElement("option");
+
+  option.value = year;
+  option.textContent = year;
+
+  yearSelect.appendChild(option);
+}
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+monthNames.forEach((month, index) => {
+  const option = document.createElement("option");
+
+  option.value = index;
+  option.textContent = month;
+
+  monthSelect.appendChild(option);
+});
+
+monthSelect.addEventListener("change", () => {
+  const selectedMonth = Number(monthSelect.value);
+
+  displayedDate.setMonth(selectedMonth);
+
+  renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
+});
+
+yearSelect.addEventListener("change", () => {
+  const selectedYear = Number(yearSelect.value);
+
+  displayedDate.setFullYear(selectedYear);
+
+  renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
+});
 
 renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
 
