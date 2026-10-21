@@ -44,22 +44,24 @@ test("getDateFromDaysObject throws error when occurrence not found", () => {
 
 test("getOccurencesForTheMonth for October 2024 is correct", () => {
   assert.deepStrictEqual(getOccurencesForTheMonth(2024, "October", days), [
-    { date: new Date(Date.UTC(2024, 9, 8)), name: "Ada Lovelace Day" }, // Second Tuesday is 8th of October 2024
-    { date: new Date(Date.UTC(2024, 9, 25)), name: "World Lemur Day" }, // Last Friday is 25th of October 2024
+    { year: 2024, month: 10, day: 8, name: "Ada Lovelace Day" }, // Second Tuesday is 8th of October 2024
+    { year: 2024, month: 10, day: 25, name: "World Lemur Day" }, // Last Friday is 25th of October 2024
   ]);
 });
 
 test("getOccurencesForTheMonth for October 2025 is correct", () => {
   assert.deepStrictEqual(getOccurencesForTheMonth(2025, "October", days), [
-    { date: new Date(Date.UTC(2025, 9, 14)), name: "Ada Lovelace Day" }, // Second Tuesday is 14th of October 2025
-    { date: new Date(Date.UTC(2025, 9, 31)), name: "World Lemur Day" }, // Last Friday is 31st of October 2025
+    { year: 2025, month: 10, day: 14, name: "Ada Lovelace Day" }, // Second Tuesday is 14th of October 2025
+    { year: 2025, month: 10, day: 31, name: "World Lemur Day" }, // Last Friday is 31st of October 2025
   ]);
 });
 
 test("getOccurencesForTheMonth for May 2025 is correct", () => {
   assert.deepStrictEqual(getOccurencesForTheMonth(2025, "May", days), [
     {
-      date: new Date(Date.UTC(2025, 4, 10)), // Second Saturday is 10th of May 2025
+      year: 2025,
+      month: 5,
+      day: 10, // Second Saturday is 10th of May 2025
       name: "International Binturong Day",
     },
   ]);
@@ -80,7 +82,9 @@ test("getOccurencesForTheMonth for August 2026 is correct", () => {
   ];
   assert.deepStrictEqual(getOccurencesForTheMonth(2026, "August", newDays), [
     {
-      date: new Date(Date.UTC(2026, 7, 31)), // Last Monday is 31st of August 2026
+      year: 2026,
+      month: 8,
+      day: 31, // Last Monday is 31st of August 2026
       name: "Summer Bank Holiday",
     },
   ]);
