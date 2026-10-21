@@ -77,13 +77,18 @@ export function getOccurencesForTheMonth(year, monthName, days) {
   // Filter the days to get only the ones for the specified month
   return days
     .filter((day) => day.monthName === monthName)
-    .map((day) => ({
-      date: getDateFromDaysObject(
+    .map((day) => {
+      const date = getDateFromDaysObject(
         year,
         day.monthName,
         day.dayName,
         day.occurrence,
-      ),
-      name: day.name,
-    }));
+      );
+      return {
+        year: date.getUTCFullYear(),
+        month: date.getUTCMonth() + 1,
+        day: date.getUTCDate(),
+        name: day.name,
+      };
+    });
 }
