@@ -39,8 +39,40 @@
 
 - [x] Confirm that the UI is generated via DOM manipulation and that day generation is fully dynamic.
 - [x] Verify that the calendar handles arbitrary additional days added to the data file successfully.
+
+![Added an occurence in `days.json`](./docs/new-occurence-added.png)
+
+![Added occurence displayed in the UI](./docs/new-occurence-display.png)
+
 - [x] Run Lighthouse in **Desktop device mode** across all views on the website and verify a score of **100% for Accessibility**.
 - [x] Confirm that unit tests are written and passing for at least one non-trivial function.
+
+  Here's the output of `npm test`:
+
+  ```bash
+  > project-days-calendar@1.0.0 test
+  > node --test
+
+  ✔ getDateFromDaysObject for Ada Lovelace Day is correct (5.588964ms)
+  ✔ getDateFromDaysObject for last occurrence of day of week is correct (0.216107ms)
+  ✔ getDateFromDaysObject throws error when month not found (0.271277ms)
+  ✔ getDateFromDaysObject throws error when day of week not found (0.162508ms)
+  ✔ getDateFromDaysObject throws error when occurrence not found (0.170238ms)
+  ✔ getOccurencesForTheMonth for October 2024 is correct (0.314176ms)
+  ✔ getOccurencesForTheMonth for October 2025 is correct (0.169828ms)
+  ✔ getOccurencesForTheMonth for May 2025 is correct (0.161078ms)
+  ✔ getOccurencesForTheMonth for January 2025 is correct (0.173218ms)
+  ✔ getOccurencesForTheMonth for August 2026 is correct (0.256047ms)
+  ℹ tests 10
+  ℹ suites 0
+  ℹ pass 10
+  ℹ fail 0
+  ℹ cancelled 0
+  ℹ skipped 0
+  ℹ todo 0
+  ℹ duration_ms 69.773511
+  ```
+
 - [x] Audit the codebase to ensure zero dead code (all written JavaScript and CSS are actively used).
 
 ---
@@ -52,6 +84,14 @@
 - [x] Run the supplied script using Node.js to generate the `days.ics` file.
 - [x] Import the generated `days.ics` file into Google Calendar.
 - [x] Verify that all dates and events match the web UI correctly.
+
+  Here's the `October 2026` from the web UI:
+
+  ![October 2026 from the web UI](./docs/ui-screenshot-october-26.png)
+
+  Here's the corresponding month in the Google Calendar:
+
+  ![October 2026 in Google Calendar](./docs/google-screenshot-october-26.png)
 
 ### Calendar Event Properties
 
