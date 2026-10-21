@@ -102,7 +102,7 @@ test("createIcal creates valid iCalendar string for 2020 to 2030", () => {
   assert.ok(ical.startsWith("BEGIN:VCALENDAR\r\n"));
   assert.ok(ical.endsWith("END:VCALENDAR\r\n"));
   assert.ok(ical.includes("VERSION:2.0\r\n"));
-  assert.ok(ical.includes("PRODID:-//CodeYourFuture//Days Calendar//EN\r\n"));
+  assert.ok(ical.includes("PRODID:-//Cool Dudes Inc//CoolEvents Calendar//EN\r\n"));
 
   // Check line endings: all newlines in file should be preceded by \r
   const rawLines = ical.split("\n");
