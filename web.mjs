@@ -112,6 +112,22 @@ function renderCalendar(year, month) {
     row.appendChild(cell);
   }
 
+  // Ensure the year option exists in yearSelect so it never renders blank
+  if (!yearSelect.querySelector(`option[value="${year}"]`)) {
+    const newOption = document.createElement("option");
+    newOption.value = year;
+    newOption.textContent = year;
+
+    const nextOption = Array.from(yearSelect.options).find(
+      (opt) => Number(opt.value) > year,
+    );
+    if (nextOption) {
+      yearSelect.insertBefore(newOption, nextOption);
+    } else {
+      yearSelect.appendChild(newOption);
+    }
+  }
+
   monthSelect.value = month;
   yearSelect.value = year;
 }
