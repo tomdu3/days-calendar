@@ -1,18 +1,41 @@
-// This is a placeholder file which shows how you can access functions and data defined in other files.
-// It can be loaded into index.html.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
-// import { getGreeting } from "./common.mjs";
-// import daysData from "./days.json" with { type: "json" };
-
-// window.onload = function () {
-//   document.querySelector("body").innerText =
-//     `${getGreeting()} - there are ${daysData.length} known days`;
-// };
+import { getOccurencesForTheMonth } from "./common.mjs";
+import daysData from "./days.json" with { type: "json" };
 
 const monthHeading = document.getElementById("month-heading");
 const calendarBody = document.getElementById("calendar-body");
+const previousButton = document.getElementById("previous-month");
+const nextButton = document.getElementById("next-month");
+const monthSelect = document.getElementById("month-select");
+const yearSelect = document.getElementById("year-select");
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+for (let year = 2020; year <= 2035; year++) {
+  const option = document.createElement("option");
+  option.value = year;
+  option.textContent = year;
+  yearSelect.appendChild(option);
+}
+
+monthNames.forEach((month, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = month;
+  monthSelect.appendChild(option);
+});
 
 const today = new Date();
 let displayedDate = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -32,6 +55,9 @@ function renderCalendar(year, month) {
     month: "long",
     year: "numeric",
   });
+
+  const monthName = monthNames[month];
+  const occurrences = getOccurencesForTheMonth(year, monthName, daysData);
 
   // Clear existing calendar cells before rendering.
   calendarBody.replaceChildren();
@@ -67,6 +93,15 @@ function renderCalendar(year, month) {
 
       // Put the date inside its rectangle.
       cell.appendChild(time);
+
+      // Check for commemorative occurrences on this day
+      const dayOccurrences = occurrences.filter((occ) => occ.day === day);
+      for (const occ of dayOccurrences) {
+        const eventEl = document.createElement("p");
+        eventEl.classList.add("event");
+        eventEl.textContent = occ.name;
+        cell.appendChild(eventEl);
+      }
     } else {
       // Create an empty padding cell.
       cell.classList.add("empty");
@@ -76,74 +111,31 @@ function renderCalendar(year, month) {
     // Add the rectangle to the current row.
     row.appendChild(cell);
   }
+
   monthSelect.value = month;
   yearSelect.value = year;
 }
 
-const previousButton = document.getElementById("previous-month");
-const nextButton = document.getElementById("next-month");
-const monthSelect = document.getElementById("month-select");
-const yearSelect = document.getElementById("year-select");
-
-for (let year = 2020; year <= 2035; year++) {
-  const option = document.createElement("option");
-
-  option.value = year;
-  option.textContent = year;
-
-  yearSelect.appendChild(option);
-}
-
-const monthNames = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-monthNames.forEach((month, index) => {
-  const option = document.createElement("option");
-
-  option.value = index;
-  option.textContent = month;
-
-  monthSelect.appendChild(option);
-});
-
 monthSelect.addEventListener("change", () => {
   const selectedMonth = Number(monthSelect.value);
-
   displayedDate.setMonth(selectedMonth);
-
   renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
 });
 
 yearSelect.addEventListener("change", () => {
   const selectedYear = Number(yearSelect.value);
-
   displayedDate.setFullYear(selectedYear);
-
   renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
 });
 
-renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
-
 previousButton.addEventListener("click", () => {
   displayedDate.setMonth(displayedDate.getMonth() - 1);
-
   renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
 });
 
 nextButton.addEventListener("click", () => {
   displayedDate.setMonth(displayedDate.getMonth() + 1);
-
   renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
 });
+
+renderCalendar(displayedDate.getFullYear(), displayedDate.getMonth());
