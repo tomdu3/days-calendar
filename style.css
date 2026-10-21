@@ -1,4 +1,3 @@
-
 table {
   width: 100%;
   table-layout: fixed;
@@ -23,6 +22,22 @@ td {
 
 td.empty {
   background-color: #f7f7f7;
+}
+
+time {
+  display: block;
+  font-weight: bold;
+}
+
+.event {
+  margin: 6px 0 0;
+  padding: 4px 6px;
+  background-color: #e2fcef;
+  color: #000;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  word-break: break-word;
 }
 
 .visually-hidden {
